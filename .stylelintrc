@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-prettier"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-prettier"
+  ],
+  "rules": {
+    "max-nesting-depth": 3,
+    "selector-max-compound-selectors": 4,
+    "selector-max-id": 1,
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": [
+          "attribute",
+          "class",
+          "id"
+        ]
+      }
+    ],
+    "prettier/prettier": true
+  }
+}
