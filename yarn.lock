@@ -4813,15 +4813,13 @@ editorjs-github-gist-plugin@^1.1.0:
   resolved "https://registry.yarnpkg.com/editorjs-github-gist-plugin/-/editorjs-github-gist-plugin-1.1.0.tgz#40718bdcec89d0639197de75a421e5a6d790a219"
   integrity sha512-SnRQjA0NPMRkhlKydn1WmjvGpixO+FtyBw8BG9MbRiCvuLWT088LP5Mr1z3Q+1GSkWrGi6jB4E3etkKLHWeufw==
 
-editorjs-inline-font-family-tool@^1.0.4:
+"editorjs-inline-font-family-tool@https://github.com/brc-dd/editorjs-inline-font-family.git":
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/editorjs-inline-font-family-tool/-/editorjs-inline-font-family-tool-1.0.4.tgz#3fb5f3c568c376080135422fdfede4b32cec3f95"
-  integrity sha512-9fCbazdtr0EasyCUeS86FS8oyFiy8OlHPNdpXqoTmYa1BEVADtz0aUyUQ4WdghvfA+rOGGkB3V20j88UYdalcw==
+  resolved "https://github.com/brc-dd/editorjs-inline-font-family.git#358546ec29fc5ec0eab09676f3858e5a2b48fed1"
 
-editorjs-inline-font-size-tool@^1.0.1:
+"editorjs-inline-font-size-tool@https://github.com/brc-dd/editorjs-inline-font-size.git":
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/editorjs-inline-font-size-tool/-/editorjs-inline-font-size-tool-1.0.1.tgz#43c1eac14c1716927a8279d10cadc33e46ba9cf8"
-  integrity sha512-ZuwRGaLrPBwPqW9KawMGjWuvyvPGO/tPUReWYBdyqAmFuOB5H5nw8TK1gAVIMFp7Q+vT0pQdscgHwnktj8pd5w==
+  resolved "https://github.com/brc-dd/editorjs-inline-font-size.git#9c59d3350d5a56847d2dbf47dc1d3ae3a34fd680"
 
 editorjs-inline-image@^0.1.1:
   version "0.1.1"

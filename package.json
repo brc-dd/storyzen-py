@@ -35,8 +35,8 @@
     "bootstrap": "^4.5.3",
     "editorjs-drag-drop": "^0.1.1",
     "editorjs-github-gist-plugin": "^1.1.0",
-    "editorjs-inline-font-family-tool": "^1.0.4",
-    "editorjs-inline-font-size-tool": "^1.0.1",
+    "editorjs-inline-font-family-tool": "https://github.com/brc-dd/editorjs-inline-font-family.git",
+    "editorjs-inline-font-size-tool": "https://github.com/brc-dd/editorjs-inline-font-size.git",
     "editorjs-inline-image": "^0.1.1",
     "editorjs-math": "^1.0.15",
     "editorjs-undo": "^0.1.4",
@@ -113,7 +113,7 @@
     "package.json": "prettier-package-json --write ",
     "*.js": "eslint --fix",
     "*.svg": "svgo",
-    "*.json, .eslintrc, .prettierrc, .stylelintrc": [
+    "{*.json,.eslintrc,.prettierrc,.stylelintrc}": [
       "jsonlint",
       "prettier --write"
     ],
