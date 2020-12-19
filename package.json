@@ -5,6 +5,7 @@
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "lint": "lint-staged --allow-empty",
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
@@ -100,7 +101,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged --allow-empty",
+      "pre-commit": "yarn lint && yarn audit",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
