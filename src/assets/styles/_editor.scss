@@ -1,0 +1,9 @@
+#editorjs {
+  min-height: 75vh;
+
+  .ce-toolbox {
+    &__button > svg {
+      max-height: 1rem;
+    }
+  }
+}

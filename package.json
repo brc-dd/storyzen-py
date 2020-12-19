@@ -35,11 +35,11 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.5.3",
     "editorjs-drag-drop": "^0.1.1",
-    "editorjs-github-gist-plugin": "^1.1.0",
+    "editorjs-github-gist-plugin": "https://github.com/brc-dd/editorjs-github-gist-plugin.git",
     "editorjs-inline-font-family-tool": "https://github.com/brc-dd/editorjs-inline-font-family.git",
     "editorjs-inline-font-size-tool": "https://github.com/brc-dd/editorjs-inline-font-size.git",
-    "editorjs-inline-image": "^0.1.1",
-    "editorjs-math": "^1.0.15",
+    "editorjs-inline-image": "https://github.com/brc-dd/editorjs-inline-image.git",
+    "editorjs-math": "https://github.com/brc-dd/editorjs-math.git",
     "editorjs-undo": "^0.1.4",
     "editorjs2-strikethrough": "^0.0.1",
     "editorjs2-subscript": "^0.0.6",
@@ -50,7 +50,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "simple-video-editorjs": "^1.4.9",
+    "simple-video-editorjs": "https://github.com/brc-dd/simple-video.git",
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
@@ -114,7 +114,7 @@
     "package.json": "prettier-package-json --write ",
     "*.js": "eslint --fix",
     "*.svg": "svgo",
-    "{*.json,.eslintrc,.prettierrc,.stylelintrc}": [
+    "{*.json,.eslintrc,.prettierrc}": [
       "jsonlint",
       "prettier --write"
     ],
