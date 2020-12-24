@@ -1,9 +1,81 @@
-#editorjs {
+.codex-editor {
   min-height: 75vh;
 
-  .ce-toolbox {
-    &__button > svg {
-      max-height: 1rem;
+  &__redactor {
+    > div:first-child {
+      h2 {
+        color: #292929;
+        padding: 0 0 1em;
+      }
+
+      + div h4 {
+        color: #757575;
+        padding: 0.3em 0 3em;
+      }
+    }
+  }
+}
+
+.ce-toolbox {
+  &__button > svg {
+    max-height: 1rem;
+  }
+}
+
+.ce-toolbar {
+  &__content {
+    max-width: 44em;
+  }
+}
+
+.ce-block {
+  &__content {
+    max-width: 44em;
+  }
+}
+
+.ce-header {
+  @at-root {
+    h4#{&} {
+      font-size: 1.375em;
+      font-weight: 400;
+      padding: 1.375em 0 1em;
+    }
+
+    h3#{&} {
+      padding: 1.75em 0 1.375em;
+    }
+
+    h2#{&} {
+      font-size: 2.5em;
+      font-weight: 400;
+      padding: 2.5em 0 1.75em;
+    }
+  }
+}
+
+.ce-paragraph,
+.cdx-list {
+  font-size: 1.125em;
+}
+
+.inline-image {
+  margin: 2em 0;
+  padding: 0;
+
+  &__picture {
+    text-align: center;
+  }
+
+  &__caption {
+    border: 0;
+    box-shadow: none;
+    color: #757575;
+    padding: 0;
+    text-align: center;
+
+    &[contentEditable='true'][data-placeholder]:empty::before {
+      display: inline !important;
     }
   }
 }

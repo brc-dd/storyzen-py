@@ -1,7 +1,8 @@
 export default {
   list: {
     class: require('@editorjs/list'),
-    shortcut: 'CMD+SHIFT+L'
+    shortcut: 'CMD+SHIFT+L',
+    inlineToolbar: true
   },
   header: {
     class: require('@editorjs/header'),
@@ -58,7 +59,10 @@ export default {
       }
     }
   },
-  underline: require('@editorjs/underline'),
+  underline: {
+    class: require('@editorjs/underline'),
+    shortcut: 'CMD+U'
+  },
   textAlign: require('@canburaks/text-align-editorjs'),
   ColorPicker: require('@itech-indrustries/editor-js-text-color'),
   strikethrough: {
@@ -79,6 +83,6 @@ export default {
     shortcut: 'ALT+E'
   },
   gist: require('editorjs-github-gist-plugin'),
-  video: require('simple-video-editorjs'),
+  // video: require('simple-video-editorjs'),
   fontSize: require('editorjs-inline-font-size-tool')
 };

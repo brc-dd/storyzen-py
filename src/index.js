@@ -9,7 +9,12 @@ import reportWebVitals from 'reportWebVitals';
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route exact path="/" component={StoryEditor} />
+      <Route path="/edit">
+        <StoryEditor />
+      </Route>
+      <Route path="/view">
+        <StoryEditor readOnly />
+      </Route>
     </Switch>
   </Router>,
   document.getElementById('root')
