@@ -1,5 +1,5 @@
 export default {
-  time: 1608818985552,
+  time: 1609072217198,
   blocks: [
     {
       type: 'header',
@@ -20,7 +20,7 @@ export default {
       type: 'paragraph',
       data: {
         text:
-          'If you are a new writer on StoryZen you probably have looked at ways to improve the formatting of your StoryZen articles. We have tried to make this guide comprehensive enough that it would be useful to both new writers who want to explore all the formatting features StoryZen offers, and to veteran writers who think they know all the tricks but may have overlooked one or two more obscure ones.<br>'
+          'If you are a new writer on StoryZen you probably have looked at ways to improve the formatting of your StoryZen articles. We have tried to make this guide comprehensive enough that it would be useful to both new writers who want to explore all the formatting features StoryZen offers, and to veteran writers who think they know all the tricks but may have overlooked one or two more obscure ones.'
       }
     },
     {
@@ -74,7 +74,7 @@ export default {
       type: 'paragraph',
       data: {
         text:
-          'To create a hyperlink in your post, select the text you want to convert into a link to open the text toolbar, <b>click on the chain icon</b> in the toolbar to hyperlink the selected text, paste or type in a link, and press enter.'
+          'To create a hyperlink in your post, select the text you want to convert into a link to open the text toolbar, <b>click on the chain icon</b> in the toolbar to hyperlink the selected text, paste or type in a link, and press enter. If you forget to manually add hyperlink to an URL/Email/Phone Number, then StoryZen will automatically add link(s) while publishing.'
       }
     },
     { type: 'header', data: { text: 'Highlight', level: 4 } },
@@ -127,6 +127,114 @@ export default {
           '<b>Headings:</b> To create a heading, select any text that isn’t the title or subtitle and choose “<i>Heading</i>” from “<i>Convert To</i>” in the toolbar. Alternatively, you can also use add block option (<b>+</b> sign on the left) to create a heading, or maybe it’s shortcut – <i>Ctrl + Shift + H</i>.',
           '<b>Subheadings:</b> To make the text a subheading, first make it a heading, and then use tuner to select <b>H4</b> <i>(header level-4)</i>. When you will create a subheading you may notice a shift in layout, which basically removes extra space between the headers.'
         ]
+      }
+    },
+    { type: 'header', data: { text: 'Quotes', level: 3 } },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          "To add a quote, click on <b>+</b> on the left side of a new block and choose quote (<b>≫</b> symbol). Alternatively, use it's shortcut <i>Ctrl + Shift + M</i>, or use “<i>Convert To</i>” option in the toolbar."
+      }
+    },
+    {
+      type: 'image',
+      data: {
+        url: 'https://i.imgur.com/4Sv28dU.gif',
+        caption: '',
+        withBorder: true,
+        withBackground: false,
+        stretched: false
+      }
+    },
+    { type: 'header', data: { text: 'Creating Lists', level: 3 } },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          "To add a list, click on <b>+</b> on the left side of a new block and choose list (<i>second symbol from left</i>). Alternatively, use it's shortcut <i>Ctrl + Shift + L</i>, or use “<i>Convert To</i>” option in the toolbar. To change list type use tuner corresponding to the list block."
+      }
+    },
+    {
+      type: 'image',
+      data: {
+        url: 'https://i.imgur.com/yEnX2FH.gif',
+        caption: '',
+        withBorder: true,
+        withBackground: false,
+        stretched: false
+      }
+    },
+    { type: 'header', data: { text: 'Dealing with Images', level: 3 } },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'To insert an image just copy – paste the image itself or a link to it. Supported formats are PNG, JPG/JPEG, GIF, TIFF. Additionally, you can add caption to images. It is optional. <i>Remember</i>, you are legally responsible for the images you share in your story.'
+      }
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'Also, StoryZen has inbuilt support to directly insert Unsplash images in the articles. To insert an image from Unsplash, use \n\n“<i>add block</i>” option and choose \n\n“<i>image</i>” from the list. <i>Note that:</i> Any image from Unsplash will be rendered with an credit link to the artist.'
+      }
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'On creating an image block, along with Unsplash, you will get an option to embed image using its URL. In case, your image URL is not being detected on directly pasting, use that option. It should work even if your image is not in supported formats.'
+      }
+    },
+    {
+      type: 'image',
+      data: {
+        url:
+          'https://user-images.githubusercontent.com/40380293/103138945-51eba500-46fd-11eb-9fd3-0c1773181e2d.gif',
+        caption: '',
+        withBorder: true,
+        withBackground: false,
+        stretched: false
+      }
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'Alongside each image block, you get an option to tune the render. There you’ll see three buttons, which from left-to-right stand for – with border, with background and stretched. Play with them to get your desired result.'
+      }
+    },
+    { type: 'header', data: { text: 'Embedding Content', level: 3 } },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'To embed a Tweet, Instagram video, or more on StoryZen, all you need to do is to paste the URL into the StoryZen editor. The following services are supported by StoryZen:'
+      }
+    },
+    {
+      type: 'list',
+      data: {
+        style: 'unordered',
+        items: [
+          '<a href="https://codepen.io/" target="_blank">CodePen</a>',
+          '<a href="https://coub.com/" target="_blank">Coub</a>',
+          '<a href="https://gfycat.com/" target="_blank">Gfycat</a>',
+          '<a href="https://twitch.tv/" target="_blank">Twitch</a>',
+          '<a href="https://vimeo.com/" target="_blank">Vimeo</a>',
+          '<a href="https://youtube.com/" target="_blank">YouTube</a>',
+          '<a href="https://twitter.com/" target="_blank">Twitter</a>',
+          '<a href="https://instagram.com/" target="_blank">Instagram</a>',
+          '<a href="https://gist.github.com/" target="_blank">GitHub Gist</a>'
+        ]
+      }
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text:
+          'Inserting a GitHub Gist in StoryZen is little tricky if you want to insert a particular file of a Gist. In that case, the URL looks like this: <i>“<a href="#">gist.github.com/user/id#file-file-name-ext</a>”</i>. Actually the <i>“file-name-ext”</i> is not the original name of the file you want to refer. GitHub has changed all symbols to hyphens and changed all upper case characters to lower case. So, change that part to actual name of the file (e.g. <i>“<a href="#">gist.github.com/user/id#file-File_Name.ext</a>”</i>) and then paste it. It should work like a charm!'
       }
     }
   ],

@@ -1,3 +1,26 @@
+@mixin caption {
+  margin: 2em auto;
+  padding: 0;
+  text-align: center;
+
+  &__caption {
+    border: 0;
+    box-shadow: none;
+    color: #757575;
+    padding: 0;
+    text-align: center;
+
+    &[contentEditable='true'][data-placeholder]:empty::before {
+      display: inline !important;
+    }
+
+    &[contentEditable='false']:empty {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
 .codex-editor {
   min-height: 75vh;
 
@@ -60,22 +83,89 @@
 }
 
 .inline-image {
-  margin: 2em 0;
-  padding: 0;
 
+  @include caption;
   &__picture {
     text-align: center;
   }
+}
 
+.cdx-quote {
+
+  font-style: italic;
+  &-settings {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  &__text,
   &__caption {
+    margin: 2em;
+    width: auto;
+  }
+
+  &__text {
+    align-items: center;
+    border: 0;
+    border-left: 0.3125em solid;
+    box-shadow: none;
+    display: flex;
+    font-size: 1.5em;
+    min-height: 4em !important;
+    padding-bottom: 1.375em;
+    padding-left: 1.375em;
+  }
+
+  &__caption[data-placeholder] {
     border: 0;
     box-shadow: none;
-    color: #757575;
-    padding: 0;
-    text-align: center;
+    font-size: 1.375em;
+    margin-top: 0;
 
-    &[contentEditable='true'][data-placeholder]:empty::before {
-      display: inline !important;
+    &::before,
+    &:empty:focus::before {
+      content: '\2014\2001' !important;
+      left: 3em;
+      opacity: 1 !important;
+      position: absolute !important;
+    }
+
+    &:empty::before {
+      content: '\2014\2001'attr(data-placeholder) !important;
+    }
+
+    &:not(:empty),
+    &:focus {
+      padding-left: 3em;
+    }
+  }
+}
+
+.embed-tool {
+  @include caption;
+
+  &__content {
+    background-color: transparent;
+    border: 0 solid;
+
+    &--instagram,
+    &--16-9 {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    &--16-9 + div {
+      padding-top: calc(56.25% + 7px);
+    }
+
+    &--instagram + div {
+      padding-top: calc(120% + 7px);
+    }
+
+    &--twitter {
+      width: 80% !important;
     }
   }
 }

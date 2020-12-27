@@ -9,6 +9,8 @@
   "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "plugins": ["autofix", "prettier"],
   "rules": {
+    "no-underscore-dangle": 0,
+    "no-nested-ternary": 0,
     "no-new": 0,
     "global-require": 0,
     "func-names": 0,

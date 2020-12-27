@@ -13,7 +13,131 @@ export default {
       defaultLevel: 3
     }
   },
-  embed: require('@editorjs/embed'),
+  embed: {
+    class: require('@editorjs/embed'),
+    config: {
+      services: {
+        codepen: {
+          regex: /(?:.*)codepen\.io\/([^/?&]*)\/(?:pen|details|full|embed)\/([^/?&]*)(?:.*)/,
+          embedUrl:
+            'https://codepen.io/<%= remote_id %>?default-tab=html,result',
+          html: '<iframe class="embed-tool__content--16-9"></iframe>',
+          id: ids => ids.join('/embed/')
+        },
+        coub: {
+          regex: /(?:.*)coub\.com\/(?:view|embed)\/([^/?&]+)(?:.*)/,
+          embedUrl: 'https://coub.com/embed/<%= remote_id %>',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        gfycat: {
+          regex: /(?:.*)gfycat\.com(?:\/detail|\/ifr)?\/([a-zA-Z]+)(?:.*)/,
+          embedUrl: 'https://gfycat.com/ifr/<%= remote_id %>',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        'twitch-channel': {
+          regex: /(?:.*)twitch\.tv\/([^/?&]*)\/?$(?:.*)/,
+          embedUrl:
+            'https://player.twitch.tv/?channel=<%= remote_id %>&parent=localhost',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        'twitch-chat': {
+          regex: /(?:.*)twitch\.tv(?:\/popout)?\/([^/?&]*)\/chat(?:.*)/,
+          embedUrl:
+            'https://www.twitch.tv/embed/<%= remote_id %>/chat?parent=localhost',
+          html: '<iframe class="embed-tool__content--16-9"></iframe>'
+        },
+        'twitch-video': {
+          regex: /(?:.*)twitch\.tv\/(?:[^/?&]*\/v|videos)\/([0-9]*)(?:.*)/,
+          embedUrl:
+            'https://player.twitch.tv/?video=v<%= remote_id %>&parent=localhost',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        'twitch-collections': {
+          regex: /(?:.*)twitch\.tv\/collections\/([^/?&]*)(?:.*)/,
+          embedUrl:
+            'https://player.twitch.tv/?collection=<%= remote_id %>&parent=localhost',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        instagram: {
+          regex: /(?:.*)instagram\.com\/p\/([^/?&]+)\/?/,
+          embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
+          html:
+            '<iframe class="embed-tool__content--instagram" allowfullscreen="true"></iframe>'
+        },
+        twitter: {
+          regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$/,
+          embedUrl:
+            'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
+          html: '<iframe class="embed-tool__content--twitter"></iframe>',
+          id: ids => ids.join('/status/')
+        },
+        youtube: {
+          regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)/,
+          embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>',
+          id: ([_id, _params]) => {
+            let id = _id;
+            let params = _params;
+
+            if (!params && id) {
+              return id;
+            }
+
+            const paramsMap = {
+              start: 'start',
+              end: 'end',
+              t: 'start',
+              time_continue: 'start',
+              list: 'list'
+            };
+
+            params = params
+              .slice(1)
+              .split('&')
+              .map(param => {
+                const [name, value] = param.split('=');
+
+                if (!id && name === 'v') {
+                  id = value;
+
+                  return undefined;
+                }
+
+                if (!paramsMap[name]) {
+                  return undefined;
+                }
+
+                return `${paramsMap[name]}=${value}`;
+              })
+              .filter(param => !!param);
+
+            return `${id}?${params.join('&')}`;
+          }
+        },
+        vimeo: {
+          regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^/]\d+)(?:#t=[\d]+)?s?$)/,
+          embedUrl:
+            'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
+          html:
+            '<iframe class="embed-tool__content--16-9" allowfullscreen="true"></iframe>'
+        },
+        'github-gist': {
+          regex: /^https?:\/\/gist\.github\.com\/([^#]+)(?:#file-(.*))?$/,
+          embedUrl:
+            '<script src="https://gist.github.com/<%= remote_id %>"></script>',
+          html: '<iframe class="embed-tool__content--github-gist"></iframe>',
+          id: ids => ids.join('.js?file='),
+          attribute: 'srcdoc'
+        }
+      }
+    }
+  },
   Marker: {
     class: require('@editorjs/marker'),
     shortcut: 'CMD+ALT+H'
@@ -78,11 +202,9 @@ export default {
     shortcut: 'CMD+UP'
   },
   fontFamily: require('editorjs-inline-font-family-tool'),
+  fontSize: require('editorjs-inline-font-size-tool'),
   Math: {
     class: require('editorjs-math'),
     shortcut: 'ALT+E'
-  },
-  gist: require('editorjs-github-gist-plugin'),
-  // video: require('simple-video-editorjs'),
-  fontSize: require('editorjs-inline-font-size-tool')
+  }
 };
