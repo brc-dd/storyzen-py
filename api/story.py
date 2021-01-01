@@ -1,4 +1,4 @@
-import http.client as htc
+import http.client as httplib
 
 from flask.globals import request
 from flask.json import jsonify
@@ -23,13 +23,13 @@ class CreateStory(Resource):
                 return jsonify({'id': str(post_story.id)})
 
             else:
-                return send_err(htc.BAD_REQUEST)
+                return send_err(httplib.BAD_REQUEST)
 
         except (FieldDoesNotExist, ValidationError):
-            return send_err(htc.BAD_REQUEST)
+            return send_err(httplib.BAD_REQUEST)
 
         except:
-            return send_err(htc.INTERNAL_SERVER_ERROR)
+            return send_err(httplib.INTERNAL_SERVER_ERROR)
 
 
 class ReadStory(Resource):
@@ -39,7 +39,7 @@ class ReadStory(Resource):
             return jsonify(Story.objects.get(uid=story_id.lower()))
 
         except DoesNotExist:
-            return send_err(htc.NOT_FOUND)
+            return send_err(httplib.NOT_FOUND)
 
         except:
-            return send_err(htc.INTERNAL_SERVER_ERROR)
+            return send_err(httplib.INTERNAL_SERVER_ERROR)
