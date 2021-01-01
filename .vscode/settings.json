@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "c:\\Users\\brc-dd\\Desktop\\cx_19_dec\\backend\\venv\\Scripts\\python.exe",
-    "python.formatting.provider": "yapf",
-    "cSpell.words": [
-        "jsonify",
-        "mongodb"
-    ]
-}
