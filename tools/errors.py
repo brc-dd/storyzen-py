@@ -6,7 +6,18 @@ from flask.wrappers import Response
 
 
 def send_err(status: int) -> Response:
-    resp = jsonify({'error': httplib.responses[status]})
+
+    resp = {
+        'blocks': [{
+            'type': 'header',
+            'data': {
+                'text': httplib.responses[status],
+                'level': 2
+            }
+        }]
+    }
+
+    resp = jsonify(resp)
     resp.status_code = status
 
     if status == httplib.INTERNAL_SERVER_ERROR:
