@@ -1,42 +1,23 @@
 /* eslint no-console:0 */
 
-// https://i.imgur.com/2MPKGOl.mp4
-
 import 'assets/styles/_editor.scss';
 
-import EditorJS from '@editorjs/editorjs';
 import Autolinker from 'autolinker';
 import DragDrop from 'editorjs-drag-drop';
 import Undo from 'editorjs-undo';
 import $ from 'jquery';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import data from 'utils/data';
-import EDITOR_JS_TOOLS from 'utils/tools';
+import { useParams } from 'react-router-dom';
+import buildEditor from 'utils/editor';
 
 export default ({ readOnly }) => {
+  const { storyID = undefined } = useParams();
+
   const changeLinks = () =>
     $('a[href^="http"]')
       .not(`a[href*="${window.location.hostname}"]`)
       .attr({ target: '_blank', rel: 'noopener noreferrer' });
-
-  const handleTweets = () => {
-    $('.embed-tool__content--twitter:not([id])').each(function () {
-      const val = $(this).attr('src');
-      const _id = `tweet_${val.substr(val.lastIndexOf('/') + 1)}_`;
-      const id = _id + $(`iframe[id^=${_id}]`).length;
-
-      setTimeout(() => {
-        // eslint-disable-next-line
-        this.contentWindow.postMessage(
-          { element: id, query: 'height' },
-          'https://twitframe.com'
-        );
-      }, 1000);
-
-      $(this).attr({ id });
-    });
-  };
 
   const bindListener = () => {
     $(window).on('message', function (e) {
@@ -51,48 +32,25 @@ export default ({ readOnly }) => {
     });
   };
 
-  const editor = new EditorJS({
-    tools: EDITOR_JS_TOOLS,
-    inlineToolbar: true,
-    placeholder: "Let's write an awesome story!",
-    onReady: () => {
-      bindListener();
+  let editor;
+  buildEditor(readOnly, storyID).then(_editor => {
+    editor = _editor;
 
-      if (!readOnly) {
-        new Undo({ editor });
-        new DragDrop(editor);
-      } else changeLinks();
-    },
-    onChange: () => {
-      const nextHeader = $('div:has(:header) + div :header');
-      $(':header').not(nextHeader).css('padding-top', '');
-      nextHeader.css('padding-top', 0);
+    editor.isReady
+      .then(() => {
+        bindListener();
 
-      $('.cdx-block.embed-tool:has(.embed-tool__content--16-9)').css({
-        height: 0,
-        position: 'relative',
-        'padding-bottom': '56.25%'
+        if (!readOnly) {
+          new Undo({ editor });
+          new DragDrop(editor);
+        } else changeLinks();
+
+        $(document.body).attr('spellcheck', true);
+        $(':root').css('--padding', readOnly ? 0 : '300px');
+      })
+      .catch(reason => {
+        console.error(`Editor.js initialization failed because of ${reason}`);
       });
-
-      $('.cdx-block.embed-tool:has(.embed-tool__content--instagram)').css({
-        height: 0,
-        width: '80%',
-        position: 'relative',
-        'padding-bottom': '120%'
-      });
-
-      $('.embed-tool__content--github-gist').each(function () {
-        $(this).css(
-          'height',
-          `${$(this).contents().find('body').height() + 30}px`
-        );
-      });
-
-      handleTweets();
-    },
-    logLevel: 'ERROR',
-    data,
-    readOnly
   });
 
   const sanitize = _data => {
@@ -155,26 +113,21 @@ export default ({ readOnly }) => {
 
     editor
       .save()
-      .then(outputData => {
-        console.log('Article data: ', outputData);
-        navigator.clipboard.writeText(sanitize(outputData)).then(
-          () => console.log('Async: Copying to clipboard was successful!'),
-          err => console.error('Async: Could not copy text: ', err)
-        );
-      })
+      .then(outputData =>
+        fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: sanitize(outputData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.id) window.location.assign(`/${data.id}`);
+          })
+      )
       .catch(error => console.error('Saving failed: ', error));
   };
-
-  useEffect(() => {
-    if (readOnly) {
-      document.body.setAttribute('spellcheck', true);
-      document.getElementsByClassName('codex-editor__redactor')[0].style[
-        'padding-bottom'
-      ] = 0;
-    }
-
-    return () => {};
-  }, [readOnly]);
 
   return (
     <Container className="py-5">

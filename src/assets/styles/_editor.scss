@@ -25,6 +25,8 @@
   min-height: 75vh;
 
   &__redactor {
+    padding-bottom: var(--padding) !important;
+
     > div:first-child {
       h2 {
         color: #292929;
@@ -83,7 +85,6 @@
 }
 
 .inline-image {
-
   @include caption;
   &__picture {
     text-align: center;
@@ -91,7 +92,6 @@
 }
 
 .cdx-quote {
-
   font-style: italic;
   &-settings {
     display: none !important;

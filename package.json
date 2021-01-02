@@ -123,5 +123,6 @@
     ],
     "*.scss": "stylelint --syntax=scss --fix",
     "*.html": "prettier --write"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

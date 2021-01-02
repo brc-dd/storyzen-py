@@ -9,10 +9,10 @@ import reportWebVitals from 'reportWebVitals';
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/edit">
+      <Route exact path="/">
         <StoryEditor />
       </Route>
-      <Route path="/view">
+      <Route path="/:storyID">
         <StoryEditor readOnly />
       </Route>
     </Switch>
