@@ -30,6 +30,7 @@ export default async (readOnly, storyID, callback) => {
       data = _data;
     }
   } catch (err) {
+    // eslint-disable-next-line
     console.error(err);
   }
 
