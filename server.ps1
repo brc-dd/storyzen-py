@@ -1,4 +1,4 @@
-if ($Debug -eq $true) {
+if ($Debug -ne $false) {
     if (!(Get-Process Insomnia -ErrorAction SilentlyContinue)) 
     { Start-Process "$ENV:LocalAppData\insomnia\Insomnia" }
     if (!(Get-Process robo3t -ErrorAction SilentlyContinue)) 

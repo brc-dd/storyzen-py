@@ -18,7 +18,6 @@ class CreateStory(Resource):
             if request.is_json:
                 data = request.get_json()
                 data['uid'] = generate_uid(data)
-                print(data['uid'])
                 post_story = Story(**data).save()
                 return jsonify({'id': str(post_story.id)})
 

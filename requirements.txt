@@ -1,5 +1,6 @@
-mongoengine==0.22.1
-Flask_RESTful==0.3.8
 Flask==1.1.2
 flask_mongoengine==1.0.0
+Flask_RESTful==0.3.8
+shortuuid==1.0.1
+mongoengine==0.22.1
 unicode_slugify==0.1.3
