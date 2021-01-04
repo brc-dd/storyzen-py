@@ -29,7 +29,7 @@ def get_flask_app(config: dict = None) -> Flask:
     flask_app = Flask(__name__)
 
     # configure app
-    config = default_config if config is None else config
+    config = default_config
     flask_app.config.update(config)
 
     # init api and routes
