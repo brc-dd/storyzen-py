@@ -27,13 +27,59 @@ export default ({ readOnly }) => {
       if (oe.data.height && oe.data.element.match(/^tweet_/))
         $(`#${oe.data.element}`).css(
           'height',
-          `${parseInt(oe.data.height, 10) + 30}px`
+          `${parseInt(oe.data.height, 10) + 10}px`
         );
     });
   };
 
+  const handleTweets = () => {
+    $('.embed-tool__content--twitter:not([id])').each(function () {
+      const val = $(this).attr('src');
+      const _id = `tweet_${val.substr(val.lastIndexOf('/') + 1)}_`;
+      const id = _id + $(`iframe[id^=${_id}]`).length;
+
+      setTimeout(() => {
+        // eslint-disable-next-line
+        this.contentWindow.postMessage(
+          { element: id, query: 'height' },
+          'https://twitframe.com'
+        );
+      }, 1000);
+
+      $(this).attr({ id });
+    });
+  };
+
+  const handleChange = () => {
+    const nextHeader = $('div:has(:header) + div :header');
+    $(':header').not(nextHeader).css('padding-top', '');
+    nextHeader.css('padding-top', 0);
+
+    $('.cdx-block.embed-tool:has(.embed-tool__content--16-9)').css({
+      height: 0,
+      position: 'relative',
+      'padding-bottom': '56.25%'
+    });
+
+    $('.cdx-block.embed-tool:has(.embed-tool__content--instagram)').css({
+      height: 0,
+      width: '80%',
+      position: 'relative',
+      'padding-bottom': '120%'
+    });
+
+    $('.embed-tool__content--github-gist').each(function () {
+      $(this).css(
+        'height',
+        `${$(this).contents().find('body').height() + 30}px`
+      );
+    });
+
+    handleTweets();
+  };
+
   let editor;
-  buildEditor(readOnly, storyID).then(_editor => {
+  buildEditor(readOnly, storyID, handleChange).then(_editor => {
     editor = _editor;
 
     editor.isReady
@@ -47,6 +93,8 @@ export default ({ readOnly }) => {
 
         $(document.body).attr('spellcheck', true);
         $(':root').css('--padding', readOnly ? 0 : '300px');
+
+        handleChange();
       })
       .catch(reason => {
         console.error(`Editor.js initialization failed because of ${reason}`);
@@ -66,9 +114,9 @@ export default ({ readOnly }) => {
         (acc, key) => {
           acc[key.trim()] =
             typeof obj[key] === 'string'
-              ? key.trim() === 'url'
-                ? obj[key].replace(/&nbsp;/g, ' ').trim()
-                : autolinker.link(obj[key].replace(/&nbsp;/g, ' ').trim())
+              ? key.trim() === 'text' || key.trim() === 'caption'
+                ? autolinker.link(obj[key].replace(/&nbsp;/g, ' ').trim())
+                : obj[key].replace(/&nbsp;/g, ' ').trim()
               : trimObj(obj[key]);
           return acc;
         },
@@ -131,7 +179,7 @@ export default ({ readOnly }) => {
 
   return (
     <Container className="py-5">
-      <div id="editorjs" className="my-4" />
+      <div id="editorjs" className="py-3" />
       {!readOnly ? (
         <Row>
           <Button
